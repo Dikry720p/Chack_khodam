@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chack Kodam</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Chack Khodam</h1>
+        <p>Masukan nama anda lalu klik tombol chack</p>
+        <form id="namaForm">
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" required>
+            <button type="submit">Chack</button>
+        </form>
+        <p id="hasil"></p>
+    </div>
+    <script src="script.js">
+      document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('namaForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const nama = document.getElementById('nama').value.trim().toLowerCase();
+        const hasilElement = document.getElementById('hasil');
+        
+        if (nama === "") {
+            hasilElement.textContent = "Silakan masukkan nama Anda.";
+            return;
+        }
+
+        const kataAcak = generateKataAcak(nama);
+        hasilElement.textContent = `Hasil: ${kataAcak}`;
+    });
+});
+
+function generateKataAcak(nama) {
+    const kata = [
+        "maung chongkok", "kuda laut", "kupu-kupu", "papatong", "monyet bodas",
+        "maung bodas", "kadal hejo", "kadal kodomo", "oray sanca", "oray kobra",
+        "belut listrik", "belut kasur", "naga emas", "laler hejo"
+    ];
+
+    // Daftar nama yang selalu menghasilkan "kupu-kupu"
+    const namaKhusus = ["rifki", "rifqy", "rifki", "kahim", "mesin"];
+
+    if (namaKhusus.includes(nama)) {
+        return "kupu-kupu";
+    }
+
+    // Seed based on the name
+    let seed = 0;
+    for (let i = 0; i < nama.length; i++) {
+        seed += nama.charCodeAt(i);
+    }
+
+    const randomIndex = seed % kata.length;
+    return kata[randomIndex];
+}
+
+    </script>
+</body>
+</html>
