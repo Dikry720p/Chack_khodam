@@ -9,15 +9,15 @@
 <body>
     <div class="container">
         <h1>Chack Khodam</h1>
-        <p>Masukan nama anda lalu klik tombol chack</p>
+        <p>segera chack khodam anda sebelum terlambat</p>
         <form id="namaForm">
             <label for="nama">Nama:</label>
-            <input type="text" id="nama" name="nama" required>
+            <input type="text" id="nama" name="nama" required placeholder="masukan nama anda">
             <button type="submit">Chack</button>
         </form>
         <p id="hasil"></p>
     </div>
-    <script src="script.js">
+        <script src="script.js">
       document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('namaForm').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -39,7 +39,7 @@ function generateKataAcak(nama) {
     const kata = [
         "maung chongkok", "kuda laut", "kupu-kupu", "papatong", "monyet bodas",
         "maung bodas", "kadal hejo", "kadal kodomo", "oray sanca", "oray kobra",
-        "belut listrik", "belut kasur", "naga emas", "laler hejo"
+        "belut listrik", "belut kasur", "naga emas", "laler hejo","lumba-lumba","megalodon","kingkong", "oray sapi", "piton","sireum hideung","sireum beurum","hiu","jaer","beunteur","tutut","undur-undur",
     ];
 
     // Daftar nama yang selalu menghasilkan "kupu-kupu"
