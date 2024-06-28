@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chack Kodam</title>
+    <title>Check Khodam</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,55 +13,57 @@
         <form id="namaForm">
             <label for="nama">Nama:</label>
             <input type="text" id="nama" name="nama" required placeholder="masukan nama anda">
+            <label for="tanggalLahir">Tanggal Lahir:</label>
+            <input type="date" id="tanggalLahir" name="tanggalLahir" required>
             <button type="submit">Check</button>
         </form>
         <p id="hasil"></p>
     </div>
-</body>
-        <script src="script.js">
-document.addEventListener('DOMContentLoaded', function() {
+    <script src="script.js">
+        document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('namaForm').addEventListener('submit', function(event) {
         event.preventDefault();
-        
+
         const nama = document.getElementById('nama').value.trim().toLowerCase();
+        const tanggalLahir = document.getElementById('tanggalLahir').value;
         const hasilElement = document.getElementById('hasil');
-        
-        if (nama === "") {
-            hasilElement.textContent = "Silakan masukkan nama Anda.";
+
+        if (nama === "" || tanggalLahir === "") {
+            hasilElement.textContent = "Silakan masukkan nama dan tanggal lahir Anda.";
             return;
         }
 
-        const kataAcak = generateKataAcak(nama);
+        const kataAcak = generateKataAcak(nama, tanggalLahir);
         hasilElement.textContent = `Hasil: ${kataAcak}`;
     });
 });
 
-function generateKataAcak(nama) {
+function generateKataAcak(nama, tanggalLahir) {
     const kata = [
-        "maung chongkok", "kuda laut", "kupu-kupu", "papatong", "monyet bodas",
+        "maung chongkok", "kuda laut", "bagong albino", "papatong", "monyet bodas",
         "maung bodas", "kadal hejo", "kadal kodomo", "oray sanca", "oray kobra",
         "belut listrik", "belut kasur", "naga emas", "laler hejo", "lumba-lumba",
         "megalodon", "kingkong", "oray sapi", "piton", "sireum hideung",
-        "sireum beurum", "hiu", "jaer", "beunteur", "tutut", "undur-undur (khodam langka)"
+        "sireum beurum", "hiu", "jaer", "beunteur", "tutut", "undur-undur (khodam langka)","bagong"
     ];
 
-    // Daftar nama yang selalu menghasilkan "kupu-kupu"
-    const namaKhusus = ["rifki", "rifqy", "rifki", "kahim", "mesin"];
+    const namaKhusus = ["rifki", "rifqy", "kahim", "mesin"];
 
     if (namaKhusus.includes(nama)) {
         return "kupu-kupu";
     }
 
-    // Seed based on the name
     let seed = 0;
     for (let i = 0; i < nama.length; i++) {
         seed += nama.charCodeAt(i);
     }
 
+    seed += new Date(tanggalLahir).getTime();
+
     const randomIndex = seed % kata.length;
-    return kata[randomIndex];
+    return kata[randomIndex];       
 }
 
-
     </script>
+</body>
 </html>
